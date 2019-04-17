@@ -8,9 +8,11 @@ Syntax coloring has been adapted for almost all supported languages by both IDE.
 
 ###### Importing the theme
 
-Just go to Preferences > Editor > Color scheme > Import scheme.
+- Just go to Preferences > Editor > Color scheme > Import scheme.
 
 <img src="figures/setting.gif" alt="logo" width="600">
+
+- Or run the provided [`install.sh`](install.sh) script and restart the IDE.
 
 ###### Screenshots
 
