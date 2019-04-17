@@ -24,7 +24,7 @@ IDE_SETTINGS_ROOT=""
 DETECTING_PATH=""
 COLORS_DIR=""
 
-function set_paths() {
+set_paths() {
   if [ "$(uname)" == "Darwin" ]; then
     IDE_SETTINGS_ROOT="$HOME/Library/Preferences"
     DETECTING_PATH="options/project.default.xml"
@@ -39,7 +39,7 @@ function set_paths() {
   fi
 }
 
-function copy_scheme() {
+copy_scheme() {
   ide=$1
   scheme=$2
   if [ -f "$IDE_SETTINGS_ROOT/$ide/$DETECTING_PATH" ]; then
@@ -49,36 +49,30 @@ function copy_scheme() {
     fi
     cp "$scheme" "$dest"
     if [ "$?" = "0" ]; then
-      echo "Mustang scheme successfully installed for JetBrains "$ide""
+      echo "Mustang scheme successfully installed for "$ide""
     fi
   fi
 }
 
-function detect_and_copy() {
-  scheme=""
+detect_and_copy() {
   found=false
   for ide in `ls -A "$IDE_SETTINGS_ROOT"`; do
     if [[ $ide =~ ^CLion.*$ ]]; then
-      scheme="mustang.clion.icls"
       found=true
-      copy_scheme $ide $scheme
+      copy_scheme "$ide" "mustang.clion.icls"
     fi
     if [[ $ide =~ ^Idea.*$ ]]; then
-      scheme="mustang.idea.icls"
       found=true
-      copy_scheme $ide $scheme
+      copy_scheme "$ide" "mustang.idea.icls"
     fi
   done
 
   if [ ! $found ]; then
-    echo "No JetBrains IDE detected"
+    echo "No supported IDE detected"
     exit 1
   fi
 }
 
-function main() {
-  set_paths
-  detect_and_copy
-}
-
-main
+# run
+set_paths
+detect_and_copy
