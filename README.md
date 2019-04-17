@@ -18,23 +18,18 @@ Some preview of supported languages:
 
 <table>
   <tr>
-    <td>c++</td><td>java</td>
+    <td>c++</td><td>java</td><td>cmake</td>
   </tr>    
   <tr>
     <td><img src="figures/color-cpp.png" alt="cpp" width="300" height="350"></td>
     <td><img src="figures/color-java.png" alt="java" width="300" height="350"></td>  
+        <td><img src="figures/color-cmake.png" alt="cmake" width="300" height="350"></td>
   </tr>
   <tr>
-    <td>cmake</td><td>yaml</td>
+    <td>yaml</td><td>xml</td><td>python</td>
   </tr>    
   <tr>
-    <td><img src="figures/color-cmake.png" alt="cmake" width="300" height="350"></td>
     <td><img src="figures/color-yaml.png" alt="yml" width="300" height="350"></td>
-  </tr>
-  <tr>
-    <td>xml</td><td>python</td>
-  </tr>      
-  <tr>
     <td><img src="figures/color-xml.png" alt="xml" width="300" height="350"></td>
     <td><img src="figures/color-python.png" alt="yaml" width="300" height="350"></td>
   </tr>
