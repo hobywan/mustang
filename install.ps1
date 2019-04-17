@@ -39,7 +39,7 @@ function Copy-Scheme($IDE, $scheme) {
   }
 }
 
-function Detect-Copy() {
+function Detect-Copy {
   $found = 0;
   $list = Get-Childitem $SETTINGS_DIR -Directory -Name;
 
