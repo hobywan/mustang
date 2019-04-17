@@ -53,13 +53,13 @@ goto :eof
 
 :detect_and_copy
   for /f "tokens=*" %%a in ('dir /b /ad "!settings_root!" 2^>nul') do (
-    echo "%%a" | findstr /i /r /c:"^\.?CLion.*$"
+    echo "%%a" | findstr /r "^\.?CLion.*$"
     if %errorlevel% equ 1 (
       set "found=true"
       call :copy_scheme "%%a", "mustang.clion.icls"
     )
 
-    echo "%%a" | findstr /i /r /c:"^\.?IdeaC.*$" "^\.?IntelliJ.*$"
+    echo "%%a" | findstr /r /c:"^\.?IdeaC.*$" "^\.?IntelliJ.*$"
     if %errorlevel% equ 1 (
       set "found=true"
       call :copy_scheme "%%a", "mustang.idea.icls"
