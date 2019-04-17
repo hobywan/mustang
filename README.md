@@ -14,7 +14,7 @@ Just go to Preferences > Editor > Color scheme > Import scheme.
 
 ###### Enable on all installed versions
 
-Just run the provided [`install.sh`](install.sh) script et voilà! 
+Just run the provided [`install.[sh|bat]`](install.sh) script et voilà! 
 >Restart the current IDE to refresh it.
 
 ###### Screenshots
