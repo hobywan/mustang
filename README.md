@@ -2,8 +2,8 @@
 
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-A sober color scheme for JetBrains [CLion](https://www.jetbrains.com/clion/) and [IntelliJ IDEA](https://www.jetbrains.com/idea/).  
-It is adapted from the excellent [mustang](https://www.deviantart.com/hcalves/art/Mustang-Vim-Colorscheme-98974484) Vim theme designed by Henrique Alves (also included).  
+A clean color scheme for JetBrains [CLion](https://www.jetbrains.com/clion/) and [IDEA](https://www.jetbrains.com/idea/).  
+It is adapted from the excellent [Vim theme](https://www.deviantart.com/hcalves/art/Mustang-Vim-Colorscheme-98974484) designed by Henrique Alves (also included).  
 Syntax coloring has been adapted for almost all supported languages by both IDE.
 
 ###### Importing the theme
