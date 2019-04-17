@@ -20,19 +20,21 @@
 # otherwise, arising from, out of or in connection with the software or
 # the use or other dealings in the Software.
 
-IDE_SETTINGS_ROOT=""
+SETTINGS_ROOT=""
+PREFIX=""
 DETECTING_PATH=""
 COLORS_DIR=""
 
 set_paths() {
   if [ "$(uname)" == "Darwin" ]; then
-    IDE_SETTINGS_ROOT="$HOME/Library/Preferences"
+    SETTINGS_ROOT="${HOME}/Library/Preferences"
     DETECTING_PATH="options/project.default.xml"
     COLORS_DIR="colors"
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    IDE_SETTINGS_ROOT="$HOME"
-    DETECTING_PATH=".config/options/project.default.xml"
-    COLORS_DIR=".config/colors"
+    SETTINGS_ROOT="${HOME}"
+    PREFIX="."
+    DETECTING_PATH="config/options/project.default.xml"
+    COLORS_DIR="config/colors"
   else
     echo "Please use install.bat script instead"
     exit 0
@@ -42,32 +44,32 @@ set_paths() {
 copy_scheme() {
   ide=$1
   scheme=$2
-  if [ -f "$IDE_SETTINGS_ROOT/$ide/$DETECTING_PATH" ]; then
-    dest=$IDE_SETTINGS_ROOT/$ide/$COLORS_DIR
-    if [ ! -d "$dest" ]; then
-      mkdir "$dest"
+  if [ -f "${SETTINGS_ROOT}/${PREFIX}${ide}/${DETECTING_PATH}" ]; then
+    dest="${SETTINGS_ROOT}/${ide}/${COLORS_DIR}"
+    if [ ! -d "${dest}" ]; then
+      mkdir "${dest}"
     fi
-    cp "$scheme" "$dest"
+    cp "${scheme}" "${dest}"
     if [ "$?" = "0" ]; then
-      echo "Mustang scheme successfully installed for "$ide""
+      echo "Mustang scheme successfully installed for ${ide}"
     fi
   fi
 }
 
 detect_and_copy() {
   found=false
-  for ide in `ls -A "$IDE_SETTINGS_ROOT"`; do
+  for ide in `ls -A "${SETTINGS_ROOT}"`; do
     if [[ $ide =~ ^CLion.*$ ]]; then
       found=true
-      copy_scheme "$ide" "mustang.clion.icls"
+      copy_scheme "${ide}" "mustang.clion.icls"
     fi
-    if [[ $ide =~ ^Idea.*$ ]]; then
+    if [[ $ide =~ ^(IdeaIC|IntelliJIdea).*$ ]]; then
       found=true
-      copy_scheme "$ide" "mustang.idea.icls"
+      copy_scheme "${ide}" "mustang.idea.icls"
     fi
   done
 
-  if [ ! $found ]; then
+  if [ ! ${found} ]; then
     echo "No supported IDE detected"
     exit 1
   fi
