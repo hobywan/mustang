@@ -42,16 +42,16 @@ set_paths() {
 }
 
 copy_scheme() {
-  ide=$1
-  scheme=$2
-  if [ -f "${SETTINGS_ROOT}/${PREFIX}${ide}/${DETECTING_PATH}" ]; then
+  ide="${PREFIX}${1}"
+  scheme="${2}"
+  if [ -f "${SETTINGS_ROOT}/${ide}/${DETECTING_PATH}" ]; then
     dest="${SETTINGS_ROOT}/${ide}/${COLORS_DIR}"
     if [ ! -d "${dest}" ]; then
       mkdir "${dest}"
     fi
     cp "${scheme}" "${dest}"
     if [ "$?" = "0" ]; then
-      echo "Mustang scheme successfully installed for ${ide}"
+      echo "Mustang scheme successfully installed for ${1}"
     fi
   fi
 }
@@ -59,11 +59,11 @@ copy_scheme() {
 detect_and_copy() {
   found=false
   for ide in `ls -A "${SETTINGS_ROOT}"`; do
-    if [[ $ide =~ ^CLion.*$ ]]; then
+    if [[ $ide =~ ^\.?CLion.*$ ]]; then
       found=true
       copy_scheme "${ide}" "mustang.clion.icls"
     fi
-    if [[ $ide =~ ^(IdeaIC|IntelliJIdea).*$ ]]; then
+    if [[ $ide =~ ^\.?(IdeaIC|IntelliJIdea).*$ ]]; then
       found=true
       copy_scheme "${ide}" "mustang.idea.icls"
     fi
