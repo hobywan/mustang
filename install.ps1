@@ -19,20 +19,19 @@
 # otherwise, arising from, out of or in connection with the software or
 # the use or other dealings in the Software.
 
-$settings_root = "";
-$detecting_path = "";
-$colors_dir = "";
+$SETTINGS_DIR = "";
+$HELPER = "";
+$COLORS_DIR = "";
 
 function Set-Paths {
-  $settings_root = $Env:USERPROFILE;
-  $detecting_path = "config\options\project.default.xml";
-  $colors_dir = "config\colors";
+  $SETTINGS_DIR = $Env:USERPROFILE;
+  $HELPER = "config\options\project.default.xml";
+  $COLORS_DIR = "config\colors";
 }
 
 function Copy-Scheme($IDE, $scheme) {
-  $helper = "$settings_root\$IDE\$detecting_path";
-  if (Test-Path $helper) {
-    $dest = "$settings_root\$IDE\$colors_dir";
+  if (Test-Path "$SETTINGS_DIR\$IDE\$HELPER") {
+    $dest = "$SETTINGS_DIR\$IDE\$COLORS_DIR";
     Copy-Item $scheme -Destination $dest;
     if (Test-Path "$dest\$scheme") {
       echo "Mustang scheme successfully installed for $IDE";
@@ -40,29 +39,28 @@ function Copy-Scheme($IDE, $scheme) {
   }
 }
 
-function Detect-And-Copy() {
-  $found = False;
-  $list = Get-Childitem $settings_root -Directory -Name;
+function Detect-Copy() {
+  $found = 0;
+  $list = Get-Childitem $SETTINGS_DIR -Directory -Name;
 
   foreach ($IDE in $list) {
     if ($IDE -match "^\.?CLion.*$") {
-      $Found = true;
-      Copy-Scheme $IDE "mustang.clion.icls"
+      $found++;
+      Copy-Scheme $IDE "mustang.clion.icls";
     }
 
     if ($IDE -match "^\.?(IdeaC|IntelliJ).*$") {
-      $Found = true;
-      Copy-Scheme $IDE "mustang.idea.icls"
+      $found++;
+      Copy-Scheme $IDE "mustang.idea.icls";
     }
   }
 
-  if (-Not($found)) {
-    echo "No supported IDE detected"
-    exit 1
+  if ($found -lt 1) {
+    echo "No supported IDE detected";
+    exit 1;
   }
 }
 
 # Run
-Set-Paths
-Detect-And-Copy
-exit 0
+Set-Paths;
+Detect-Copy;

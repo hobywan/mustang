@@ -20,21 +20,21 @@
 # otherwise, arising from, out of or in connection with the software or
 # the use or other dealings in the Software.
 
-SETTINGS_ROOT=""
+SETTINGS=""
 PREFIX=""
-DETECTING_PATH=""
-COLORS_DIR=""
+HELPER=""
+COLORS=""
 
 set_paths() {
   if [ "$(uname)" == "Darwin" ]; then
-    SETTINGS_ROOT="${HOME}/Library/Preferences"
-    DETECTING_PATH="options/project.default.xml"
-    COLORS_DIR="colors"
+    SETTINGS="${HOME}/Library/Preferences"
+    HELPER="options/project.default.xml"
+    COLORS="colors"
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    SETTINGS_ROOT="${HOME}"
+    SETTINGS="${HOME}"
     PREFIX="."
-    DETECTING_PATH="config/options/project.default.xml"
-    COLORS_DIR="config/colors"
+    HELPER="config/options/project.default.xml"
+    COLORS="config/colors"
   else
     echo "Please use install.bat script instead"
     exit 0
@@ -42,10 +42,10 @@ set_paths() {
 }
 
 copy_scheme() {
-  ide="${PREFIX}${1}"
+  IDE="${PREFIX}${1}"
   scheme="${2}"
-  if [ -f "${SETTINGS_ROOT}/${ide}/${DETECTING_PATH}" ]; then
-    dest="${SETTINGS_ROOT}/${ide}/${COLORS_DIR}"
+  if [ -f "${SETTINGS}/${IDE}/${HELPER}" ]; then
+    dest="${SETTINGS}/${IDE}/${COLORS}"
     if [ ! -d "${dest}" ]; then
       mkdir "${dest}"
     fi
@@ -58,14 +58,14 @@ copy_scheme() {
 
 detect_and_copy() {
   found=false
-  for ide in `ls -A "${SETTINGS_ROOT}"`; do
-    if [[ $ide =~ ^\.?CLion.*$ ]]; then
+  for IDE in `ls -A "${SETTINGS}"`; do
+    if [[ ${IDE} =~ ^\.?CLion.*$ ]]; then
       found=true
-      copy_scheme "${ide}" "mustang.clion.icls"
+      copy_scheme "${IDE}" "mustang.clion.icls"
     fi
-    if [[ $ide =~ ^\.?(IdeaIC|IntelliJIdea).*$ ]]; then
+    if [[ ${IDE} =~ ^\.?(IdeaIC|IntelliJIdea).*$ ]]; then
       found=true
-      copy_scheme "${ide}" "mustang.idea.icls"
+      copy_scheme "${IDE}" "mustang.idea.icls"
     fi
   done
 
