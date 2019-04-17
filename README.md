@@ -12,7 +12,10 @@ Just go to Preferences > Editor > Color scheme > Import scheme.
 
 <img src="figures/setting.gif" alt="logo" width="600">
 
-Or, just run the provided [`install.sh`](install.sh) script and restart the IDE et voilà! 
+###### Enable on all installed versions
+
+Just run the provided [`install.sh`](install.sh) script et voilà! 
+>Restart the current IDE to refresh it.
 
 ###### Screenshots
 
